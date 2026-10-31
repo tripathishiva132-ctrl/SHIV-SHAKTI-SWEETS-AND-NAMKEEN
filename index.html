@@ -1,147 +1,304 @@
+
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shiv Shakti Sweets & Namkeen</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root { --saffron: #E65100; --maroon: #880E4F; --gold: #FFD700; }
-        body { font-family: 'Poppins', sans-serif; background-color: #FFF8E7; }
-        .navbar-brand { font-weight: bold; color: var(--gold) !important; font-size: 1.5rem; }
-        .bg-custom { background: linear-gradient(135deg, var(--maroon), var(--saffron)); }
-        .nav-link.active { border-bottom: 3px solid var(--gold); color: var(--gold) !important; font-weight: bold; }
-        .screen { display: none; padding: 40px 0; }
-        .screen.active { display: block; animation: fadeIn 0.4s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .card-img-top { height: 200px; object-fit: cover; }
-        .price-tag { font-weight: bold; color: var(--saffron); font-size: 1.2rem; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shiv Shakti Sweets & Namkeen</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+:root {
+  --wine:#42121d;
+  --gold:#c9a15d;
+  --cream:#faf5eb;
+  --text:#302326;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'DM Sans',sans-serif;color:var(--text);background:#fffdf9}
+header{
+  background:var(--wine);color:white;padding:17px 7%;
+  display:flex;justify-content:space-between;align-items:center;
+  position:sticky;top:0;z-index:10
+}
+.logo{font-family:'Playfair Display',serif;font-size:21px;color:var(--gold)}
+.logo small{display:block;font:10px 'DM Sans';letter-spacing:3px;color:white}
+nav a{color:white;text-decoration:none;margin-left:23px;font-size:13px}
+.hero{
+  min-height:490px;background:linear-gradient(110deg,#351019,#702c39);
+  color:white;padding:85px 9%;display:flex;align-items:center;
+  justify-content:space-between;gap:30px
+}
+.hero h1{font:700 clamp(40px,6vw,65px)/1.1 'Playfair Display';margin:15px 0}
+.hero h1 em{color:var(--gold)}
+.hero p{max-width:450px;line-height:1.8;color:#eadcda}
+.btn{
+  display:inline-block;padding:14px 23px;background:var(--gold);
+  color:#301018;text-decoration:none;border:0;cursor:pointer;
+  font-weight:700;margin-top:16px
+}
+.hero-art{font-size:125px;text-align:center;min-width:220px}
+.hero-art small{display:block;font-size:12px;letter-spacing:3px;color:var(--gold)}
+.section{padding:75px 8%}
+.heading{text-align:center;margin-bottom:35px}
+.heading small{color:#a27c43;letter-spacing:3px;font-weight:bold}
+.heading h2{font:700 38px 'Playfair Display';margin:10px}
+.filters{text-align:center;margin-bottom:25px}
+.filters button{
+  background:white;border:1px solid #e5d8c7;padding:10px 16px;
+  margin:4px;cursor:pointer
+}
+.filters button.active{background:var(--wine);color:white}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.card{border:1px solid #eee3d6;background:white}
+.product-img{
+  height:160px;background:var(--cream);display:grid;
+  place-items:center;font-size:65px
+}
+.card-content{padding:17px}
+.card h3{font:600 19px 'Playfair Display';margin:7px 0}
+.card p{font-size:12px;color:#8c7c78}
+.price{font-weight:bold;color:var(--wine)}
+.add{
+  float:right;background:var(--wine);color:white;border:0;
+  padding:8px 13px;cursor:pointer
+}
+.about{background:var(--cream);text-align:center}
+.about p{max-width:650px;margin:auto;line-height:1.9;color:#766967}
+.order{
+  background:var(--wine);color:white;text-align:center;padding:55px 20px
+}
+.order h2{font:700 34px 'Playfair Display'}
+footer{background:#250b11;color:#d9c7bd;text-align:center;padding:30px;font-size:12px}
+.search{
+  display:block;margin:0 auto 25px;padding:12px;width:min(350px,100%);
+  border:1px solid #e5d8c7
+}
+.cart{
+  position:fixed;right:15px;bottom:15px;z-index:20;
+  background:var(--gold);border:0;padding:15px 20px;
+  font-weight:bold;cursor:pointer
+}
+.cart-panel{
+  display:none;position:fixed;z-index:30;right:0;top:0;
+  height:100%;width:min(390px,100%);background:white;
+  padding:25px;box-shadow:0 0 0 100vmax #0008;overflow:auto
+}
+.cart-panel.open{display:block}
+.cart-item{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #eee}
+.cart-item button{padding:3px 8px}
+@media(max-width:800px){
+  .hero{padding:60px 7%;min-height:400px}
+  .products{grid-template-columns:repeat(2,1fr)}
+  nav a{margin-left:9px;font-size:11px}
+}
+@media(max-width:520px){
+  header{padding:15px 5%}
+  .logo{font-size:16px}
+  nav a{margin-left:8px;font-size:10px}
+  .hero{display:block;text-align:center}
+  .hero p{margin:auto}
+  .hero-art{font-size:90px;margin-top:30px}
+  .section{padding:55px 5%}
+  .products{gap:10px}
+  .product-img{height:120px}
+  .card-content{padding:11px}
+  .card h3{font-size:16px}
+}
+</style>
 </head>
+
 <body>
 
-    <!-- Navigation Header -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-custom sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="#" onclick="showScreen('home')">🪔 Shiv Shakti Sweets</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" id="nav-home" href="#" onclick="showScreen('home')">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" id="nav-menu" href="#" onclick="showScreen('menu')">Full Menu & Rates</a></li>
-                    <li class="nav-item"><a class="nav-link" id="nav-combos" href="#" onclick="showScreen('combos')">Gift Packs</a></li>
-                    <li class="nav-item"><a class="nav-link" id="nav-location" href="#" onclick="showScreen('location')">Location & Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<header>
+  <div class="logo">SHIV SHAKTI
+    <small>SWEETS & NAMKEEN</small>
+  </div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#menu">Menu</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
 
-    <!-- SCREEN 1: HOME -->
-    <div id="home" class="screen active container text-center">
-        <div class="py-5 bg-white shadow rounded p-4">
-            <h1 class="display-4 text-danger fw-bold">शिव शक्ति स्वीट्स एवं नमकीन</h1>
-            <p class="lead text-muted">कुंडा का सबसे शुद्ध और स्वादिष्ट मिष्ठान एवं नमकीन केंद्र</p>
-            <hr class="my-4">
-            <p>ताज़ा छेना, काजू कतली, स्पेशल समोसा, और देसी घी की मिठाइयाँ।</p>
-            <div class="d-flex justify-content-center gap-3 mt-4">
-                <button onclick="showScreen('menu')" class="btn btn-warning btn-lg fw-bold">📋 Menu Dekhein</button>
-                <button onclick="showScreen('location')" class="btn btn-outline-danger btn-lg">📍 Dukan Ka Pata</button>
-            </div>
-        </div>
+<section class="hero" id="home">
+  <div>
+    <small style="color:#d5b578;letter-spacing:3px">THE TASTE OF TRADITION</small>
+    <h1>A Little Sweetness.<br><em>A Lot of Happiness.</em></h1>
+    <p>Discover delicious sweets and crunchy namkeen, made for everyday moments and special celebrations.</p>
+    <a class="btn" href="#menu">Explore Our Menu →</a>
+  </div>
+  <div class="hero-art">🍬
+    <small>MADE WITH LOVE</small>
+  </div>
+</section>
+
+<section class="section" id="menu">
+  <div class="heading">
+    <small>OUR COLLECTION</small>
+    <h2>Explore Our Menu</h2>
+  </div>
+
+  <input class="search" id="search" placeholder="Search sweets and namkeen..." oninput="renderProducts()">
+
+  <div class="filters">
+    <button class="active" onclick="setCategory('All',this)">All</button>
+    <button onclick="setCategory('Sweets',this)">Sweets</button>
+    <button onclick="setCategory('Namkeen',this)">Namkeen</button>
+    <button onclick="setCategory('Specials',this)">Specials</button>
+  </div>
+
+  <div class="products" id="products"></div>
+</section>
+
+<section class="section about" id="about">
+  <div class="heading">
+    <small>OUR STORY</small>
+    <h2>Tradition In Every Bite</h2>
+  </div>
+  <p>
+    Welcome to Shiv Shakti Sweets & Namkeen.
+    We believe every celebration deserves something sweet.
+    Discover your favourite traditional sweets and delicious namkeen
+    in Kunda, Pratapgarh, Uttar Pradesh.
+  </p>
+</section>
+
+<section class="order">
+  <h2>Make Your Day Delicious!</h2>
+  <p>Choose your favourite items and order directly through WhatsApp.</p>
+  <a href="#menu" class="btn">Order Now →</a>
+</section>
+
+<section class="section" id="contact">
+  <div class="heading">
+    <small>VISIT OUR STORE</small>
+    <h2>Contact Us</h2>
+  </div>
+  <p style="text-align:center;line-height:2">
+    📍 Kunda, Pratapgarh, Uttar Pradesh<br>
+    📦 Shop Pickup & Home Delivery<br>
+    📱 WhatsApp Ordering Available
+  </p>
+</section>
+
+<footer>
+  <h2 style="font-family:'Playfair Display';color:#d2ad70">SHIV SHAKTI</h2>
+  Sweets & Namkeen<br><br>
+  © 2026 Shiv Shakti Sweets & Namkeen
+</footer>
+
+<button class="cart" onclick="toggleCart()">🛒 Cart (<span id="count">0</span>)</button>
+
+<div class="cart-panel" id="cartPanel">
+  <button onclick="toggleCart()" style="float:right">✕ Close</button>
+  <h2>Your Order</h2>
+  <div id="cartItems"></div>
+  <h3>Total: ₹<span id="total">0</span></h3>
+  <button class="btn" onclick="checkout()">Order on WhatsApp</button>
+</div>
+
+<script>
+// CHANGE THIS TO YOUR SHOP'S WHATSAPP NUMBER.
+// Use country code + number, without + or spaces.
+const WHATSAPP_NUMBER = "91XXXXXXXXXX";
+
+const products = [
+  {id:1,name:"Kaju Katli",category:"Sweets",price:650,emoji:"🍬"},
+  {id:2,name:"Motichoor Ladoo",category:"Sweets",price:360,emoji:"🟠"},
+  {id:3,name:"Gulab Jamun",category:"Sweets",price:280,emoji:"🍯"},
+  {id:4,name:"Milk Peda",category:"Sweets",price:400,emoji:"🥮"},
+  {id:5,name:"Aloo Bhujia",category:"Namkeen",price:220,emoji:"🥨"},
+  {id:6,name:"Mixture Namkeen",category:"Namkeen",price:200,emoji:"🥜"},
+  {id:7,name:"Mathri",category:"Namkeen",price:180,emoji:"🍘"},
+  {id:8,name:"Festival Gift Box",category:"Specials",price:799,emoji:"🎁"}
+];
+
+let cart = {};
+let category = "All";
+
+function setCategory(value,button){
+  category=value;
+  document.querySelectorAll(".filters button").forEach(b=>b.classList.remove("active"));
+  button.classList.add("active");
+  renderProducts();
+}
+
+function renderProducts(){
+  const term=document.getElementById("search").value.toLowerCase();
+  const list=products.filter(p=>
+    (category==="All"||p.category===category)&&p.name.toLowerCase().includes(term)
+  );
+
+  document.getElementById("products").innerHTML=list.map(p=>`
+    <div class="card">
+      <div class="product-img">${p.emoji}</div>
+      <div class="card-content">
+        <small style="color:#ad874d">${p.category}</small>
+        <h3>${p.name}</h3>
+        <p>Fresh and delicious</p>
+        <span class="price">₹${p.price}</span>
+        <button class="add" onclick="addToCart(${p.id})">+</button>
+      </div>
     </div>
+  `).join("");
+}
 
-    <!-- SCREEN 2: MENU & PRICES -->
-    <div id="menu" class="screen container">
-        <h2 class="text-center mb-4 text-danger">Hamara Swadishth Menu</h2>
-        <div class="row g-4">
-            <!-- Item 1 -->
-            <div class="col-md-4">
-                <div class="card h-100 shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=500" class="card-img-top" alt="Kaju Katli">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">Kaju Katli (Khas)</h5>
-                        <p class="card-text text-muted">Pure Kaju & Shuddh Ghee</p>
-                        <p class="price-tag">₹900 / kg</p>
-                        <a href="https://wa.me/91917897415058?text=Mujhe%20Kaju%20Katli%20Order%20Karna%20Hai" class="btn btn-success w-100"><i class="fab fa-whatsapp"></i> Order on WhatsApp</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Item 2 -->
-            <div class="col-md-4">
-                <div class="card h-100 shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=500" class="card-img-top" alt="Gulab Jamun">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">Desi Ghee Gulab Jamun</h5>
-                        <p class="card-text text-muted">Soft Mawa Jamun</p>
-                        <p class="price-tag">₹360 / kg</p>
-                        <a href="https://wa.me/91917897415058?text=Mujhe%20Gulab%20Jamun%20Order%20Karna%20Hai" class="btn btn-success w-100"><i class="fab fa-whatsapp"></i> Order on WhatsApp</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Item 3 -->
-            <div class="col-md-4">
-                <div class="card h-100 shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1626132647523-66f5bf380027?w=500" class="card-img-top" alt="Special Namkeen">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">Special Shahi Mixture</h5>
-                        <p class="card-text text-muted">Crispy Namkeen & Dryfruits</p>
-                        <p class="price-tag">₹240 / kg</p>
-                        <a href="https://wa.me/91917897415058?text=Mujhe%20Shahi%20Mixture%20Order%20Karna%20Hai" class="btn btn-success w-100"><i class="fab fa-whatsapp"></i> Order on WhatsApp</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+function addToCart(id){
+  cart[id]=(cart[id]||0)+1;
+  renderCart();
+}
 
-    <!-- SCREEN 3: GIFT PACKS -->
-    <div id="combos" class="screen container">
-        <h2 class="text-center mb-4 text-danger">Festive Gift Boxes</h2>
-        <div class="row g-4">
-            <div class="col-md-6">
-                <div class="card shadow">
-                    <div class="card-body">
-                        <h4 class="card-title text-warning fw-bold">🎁 Royal Royal Pack</h4>
-                        <p>Kaju Katli (500g) + Mix Sweets (500g) + Shahi Namkeen (500g)</p>
-                        <h4 class="text-danger">Price: ₹1,250</h4>
-                        <a href="https://wa.me/91917897415058?text=Mujhe%20Royal%20Pack%20Gift%20Box%20Chahiye" class="btn btn-success mt-2"><i class="fab fa-whatsapp"></i> Book Gift Pack</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+function renderCart(){
+  let count=0,total=0;
+  let html="";
+  products.forEach(p=>{
+    const qty=cart[p.id]||0;
+    if(qty){
+      count+=qty;
+      total+=qty*p.price;
+      html+=`<div class="cart-item">
+        <span>${p.name}<br>₹${p.price} × ${qty}</span>
+        <span>
+          <button onclick="changeQty(${p.id},-1)">−</button>
+          <button onclick="changeQty(${p.id},1)">+</button>
+        </span>
+      </div>`;
+    }
+  });
+  document.getElementById("cartItems").innerHTML=html||"<p>Your cart is empty.</p>";
+  document.getElementById("count").textContent=count;
+  document.getElementById("total").textContent=total;
+}
 
-    <!-- SCREEN 4: LOCATION & CONTACT -->
-    <div id="location" class="screen container">
-        <div class="row bg-white p-4 rounded shadow">
-            <div class="col-md-6">
-                <h3 class="text-danger fw-bold">📍 Store Address</h3>
-                <p class="fs-5">Shiv Shakti Sweets & Namkeen<br>Main Market, Kunda, Uttar Pradesh</p>
-                <hr>
-                <h4>📞 Contact Us:</h4>
-                <p class="fs-5">Phone / WhatsApp: <strong>+91 917897415058</strong></p>
-                <p>Timing: Subah 7:00 AM se Raat 10:00 PM tak (Daily)</p>
-            </div>
-            <div class="col-md-6">
-                <div class="ratio ratio-4x3 rounded shadow-sm overflow-hidden">
-                    <iframe src="https://maps.google.com/maps?q=Kunda,%20Uttar%20Pradesh&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
-                </div>
-            </div>
-        </div>
-    </div>
+function changeQty(id,change){
+  cart[id]=(cart[id]||0)+change;
+  if(cart[id]<=0)delete cart[id];
+  renderCart();
+}
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        function showScreen(screenId) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
-            
-            document.getElementById(screenId).classList.add('active');
-            document.getElementById('nav-' + screenId).classList.add('active');
-            window.scrollTo(0, 0);
-        }
-    </script>
+function toggleCart(){
+  document.getElementById("cartPanel").classList.toggle("open");
+}
+
+function checkout(){
+  const lines=products.filter(p=>cart[p.id]).map(p=>
+    `${p.name} x ${cart[p.id]} = ₹${p.price*cart[p.id]}`
+  );
+  if(!lines.length){alert("Please add products first.");return;}
+  if(WHATSAPP_NUMBER.includes("X")){
+    alert("Please add your shop WhatsApp number in the code first.");
+    return;
+  }
+  const total=products.reduce((sum,p)=>sum+(cart[p.id]||0)*p.price,0);
+  const message=`Namaste Shiv Shakti Sweets & Namkeen!%0A%0A${lines.join("%0A")}%0A%0ATotal: ₹${total}%0A%0APlease confirm my order.`;
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`,"_blank");
+}
+
+renderProducts();
+renderCart();
+</script>
 </body>
 </html>
